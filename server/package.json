@@ -1,0 +1,26 @@
+{
+  "name": "minecraftdb-server",
+  "version": "1.0.0",
+  "description": "GraphQL backend for minecraftdb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js -w ./src -e js,gql",
+    "lint": "eslint ./src"
+  },
+  "author": "Victor Chen",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "apollo-datasource": "^0.6.4",
+    "apollo-errors": "^1.9.0",
+    "apollo-server": "^2.9.16",
+    "glob": "^7.1.6",
+    "graphql": "^14.5.8",
+    "ramda": "^0.26.1",
+    "require-text": "0.0.1"
+  }
+}
