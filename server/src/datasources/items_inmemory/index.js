@@ -5,36 +5,41 @@ const { ApolloError } = require('apollo-server');
 const R = require('ramda');
 
 const pool = {};
+const itemsArray = [];
 
 // Formats recipe into 3x3 grid form
-const formatRecipe = (recipe) => {
+const formatRecipe = recipe => {
   const rows = recipe.length;
   const cols = recipe[0].length;
-  const row_offset = rows === 3 ? 0 : 1;
-  const col_offset = cols === 3 ? 0 : 1;
+  const row_offset = rows === 3
+    ? 0
+    : 1;
+  const col_offset = cols === 3
+    ? 0
+    : 1;
   // 3x3 empty array
-  const result = [...new Array(3)].map(x => new Array(3).fill(null));
+  const result = [...new Array(3)].map(_unused => new Array(3).fill(null));
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       const [id, sub_id = 0] = recipe[i][j].split(':').map(n => parseInt(n, 10));
-      result[i+row_offset][j+col_offset] = pool[id][sub_id];
+      result[i + row_offset][j + col_offset] = pool[id][sub_id];
     }
   }
   return result;
 };
 
 const data = (() => {
-  const data = require('./data');
-  for (const item of data) {
-    const id = item.id;
+  const raw = require('./data');
+  for (const item of raw) {
+    const { id } = item;
     pool[id] = pool[id] || {};
     pool[id][item.sub_id || 0] = item;
     item.crafts_to = new Set();
-    // temporary hack
+    // Temporary hack
     item.image_url = `http://localhost:4001/${item.image_url}`;
   }
-  let s = new Set();
-  for (const item of data) {
+  const s = new Set();
+  for (const item of raw) {
     if (item.crafts_from) {
       for (const recipe of item.crafts_from) {
         recipe.recipe = Object.freeze(formatRecipe(recipe.recipe));
@@ -54,10 +59,12 @@ const data = (() => {
       }
     }
   }
-  for (const item of data) {
+  for (const item of raw) {
     item.crafts_to = [...item.crafts_to];
     Object.freeze(item);
+    itemsArray.push(item);
   }
+  itemsArray.sort((a, b) => a.id - b.id);
   return Object.freeze(pool);
 })();
 
@@ -71,6 +78,9 @@ class ItemsDataSource extends DataSource {
       return result;
     }
     throw new ApolloError(`Item with id: ${id}, sub_id: ${sub_id} not found.`, 'ITEM_NOT_FOUND');
+  }
+  async getAllItems() {
+    return itemsArray;
   }
 }
 
