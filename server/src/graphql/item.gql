@@ -1,8 +1,19 @@
 extend type Query {
-  item(id: Int!): Item
+  item(id: Int!, sub_id: Int! = 0): Item
 }
 
 type Item {
   id: Int!
+  sub_id: Int
   name: String!
+  image_url: String!
+  crafts_to: [Item!]!
+  crafts_from: [CraftingRecipe!]!
+}
+
+type CraftingRecipe {
+  # a 3x3 grid of items needed to craft
+  recipe: [[Item]!]!
+  # number of items produced
+  yield: Int!
 }

@@ -13,7 +13,8 @@ const server = new ApolloServer({
   resolvers,
   dataSources: () => ({
     items: new ItemsDataSource()
-  })
+  }),
+  debug: false
 });
 
 server.listen().then(({ url }) => {
@@ -23,7 +24,7 @@ server.listen().then(({ url }) => {
 /*
  * Serve static image files
  */
-const image_port = 4002;
+const image_port = 4001;
 const express = require('express');
 const assets = express();
 

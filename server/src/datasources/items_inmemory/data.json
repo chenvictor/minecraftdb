@@ -1,48 +1,69 @@
 [
   {
-    "nid": 17,
-    "sid": "log",
-    "name": "Wood",
-    "image_url": 
+    "id": 17,
+    "sub_id": 0,
+    "name": "Oak Wood",
+    "image_url": "assets/oak_log.png"
   },
-  [
-    {
-      "name": "Stone"
-    },
-    {
-      "name": "Granite"
-    },
-    {
-      "name": "Polished Granite"
-    },
-    {
-      "name": "Diorite"
-    },
-    {
-      "name": "Polished Diorite"
-    },
-    {
-      "name": "Andesite"
-    },
-    {
-      "name": "Polished Andesite"
-    }
-  ],
   {
-    "name": "Grass"
+    "id": 5,
+    "sub_id": 0,
+    "name": "Oak Wood Plank",
+    "image_url": "assets/oak_plank.png",
+    "crafts_from": [
+      {
+        "recipe": [
+          ["17:0"]
+        ],
+        "yield": 4
+      }
+    ]
   },
-  [
-    {
-      "name": "Dirt"
-    },
-    {
-      "name": "Coarse Dirt"
-    },
-    {
-      "name": "Podzol"
-    }
-  ],
   {
-    "name": "Cobblestone"
+    "id": 280,
+    "name": "Stick",
+    "image_url": "assets/stick.png",
+    "crafts_from": [
+      {
+        "recipe": [
+          ["5:0"],
+          ["5:0"]
+        ],
+        "yield": 4
+      }
+    ]
+  },
+  {
+    "id": 263,
+    "sub_id": 0,
+    "name": "Coal",
+    "image_url": "assets/coal.png"
+  },
+  {
+    "id": 263,
+    "sub_id": 1,
+    "name": "Charcoal",
+    "image_url": "assets/charcoal.png"
+  },
+  {
+    "id": 50,
+    "name": "Torch",
+    "image_url": "assets/torch.png",
+    "crafts_from": [
+      {
+        "recipe": [
+          ["263:0"],
+          ["280"]
+        ],
+        "yield": 4
+      },
+      {
+        "recipe": [
+          ["263:1"],
+          ["280"]
+        ],
+        "yield": 4
+      }
+    ]
   }
 ]
