@@ -1,6 +1,6 @@
 extend type Query {
-  item(id: Int!, sub_id: Int! = 0): Item
   items: [Item!]!
+  item(id: Int!, sub_id: Int! = 0): Item
 }
 
 type Item {

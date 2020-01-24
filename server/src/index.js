@@ -1,3 +1,5 @@
+'use strict';
+
 const { ApolloServer } = require('apollo-server');
 const R = require('ramda');
 const requireText = require('require-text');

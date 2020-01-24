@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   Query: {
     item: (parent, { id, sub_id }, { dataSources }) => {
