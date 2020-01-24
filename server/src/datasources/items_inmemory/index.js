@@ -57,6 +57,8 @@ const data = (() => {
         Object.freeze(recipe);
 
       }
+    } else {
+      item.crafts_from = [];
     }
   }
   for (const item of raw) {
