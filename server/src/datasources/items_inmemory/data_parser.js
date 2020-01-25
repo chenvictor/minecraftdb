@@ -30,8 +30,6 @@ const parse = raw => {
     pool[id] = pool[id] || {};
     pool[id][item.sub_id || 0] = item;
     item.crafts_to = new Set();
-    // Temporary hack
-    item.image_url = `http://localhost:4001/${item.image_url}`;
   }
   const s = new Set();
   for (const item of raw) {

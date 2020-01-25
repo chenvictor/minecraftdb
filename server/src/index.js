@@ -26,11 +26,11 @@ server.listen().then(({ url }) => {
 /*
  * Serve static image files
  */
-const image_port = 4001;
-const express = require('express');
-const assets = express();
-
-assets.use(express.static(`${process.env.PWD}/public`));
-assets.listen(image_port, () => {
-  console.log(`public directory served statically on port ${image_port}`);
-});
+//const image_port = 4001;
+//const express = require('express');
+//const assets = express();
+//
+//assets.use(express.static(`${process.env.PWD}/public`));
+//assets.listen(image_port, () => {
+//  console.log(`public directory served statically on port ${image_port}`);
+//});
