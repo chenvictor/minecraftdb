@@ -4,9 +4,15 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ApolloClient from 'apollo-boost';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000'
+  uri: 'http://localhost:4000',
+  cache: new InMemoryCache({
+    dataIdFromObject: (obj) => {
+      return `${obj.id}:${obj.sub_id ? obj.sub_id : ''}`;
+    }
+  })
 });
 
 ReactDOM.render(<App client={client}/>, document.getElementById('root'));
