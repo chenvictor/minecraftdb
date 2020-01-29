@@ -16,5 +16,5 @@ type CraftingRecipe {
   # a 3x3 grid of items needed to craft
   recipe: [[Item]!]!
   # number of items produced
-  yield: Int!
+  produces: Int!
 }
