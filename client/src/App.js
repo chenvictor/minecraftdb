@@ -5,14 +5,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Search from './components/Search';
 import Display from './components/Display';
-import ItemBox from './components/ItemBox';
 import CraftingGrid from './components/CraftingGrid';
 // testing VVV
 import { Query } from '@apollo/react-components';
 import { gql } from 'apollo-boost';
 
 const test_query = gql`{
-  item(id: 50) {
+  item(id: 5) {
     id
     sub_id
     name

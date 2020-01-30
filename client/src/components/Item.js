@@ -3,7 +3,6 @@ import { Query } from '@apollo/react-components';
 import { gql } from 'apollo-boost';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
-import Item from './Item';
 
 const generateQuery = (id, sub_id) => gql`{
   item(id: ${id}, sub_id: ${sub_id || 0}) {
@@ -42,16 +41,15 @@ const useStyles = makeStyles({
   }
 });
 
-const ItemBox = ({
+const Item = ({
     item,
-    padding = 2,
-    count = 1,
+    size = null,
     showTooltip = true,
     onClick
   }) => {
-  const classes = useStyles({ padding });
+  const classes = useStyles();
   if (!item) {
-    return <div className={classes.root} />;
+    return null;
   }
   const { id, sub_id } = item;
   return (
@@ -60,21 +58,12 @@ const ItemBox = ({
     >
       {({ loading, error, data }) => {
         if (error) throw error;
-        const displayCount = count !== 1
-          ? (<span className={classes.count}>{count}</span>)
-          : null;
-        const content = loading
+        return loading
           ? (<CircularProgress className={classes.inner} size={34} />)
           : (<img className={classes.inner} src={data.item.image_url} alt={data.item.name} />);
-        return (
-          <div className={classes.root}>
-            {content}
-            {displayCount}
-          </div>
-        );
       }}
     </Query>
   );
 };
 
-export default ItemBox;
+export default Item;

@@ -8,8 +8,8 @@
   {
     "id": 5,
     "sub_id": 0,
-    "name": "Oak Wood Plank",
-    "image_url": "assets/oak_plank.png",
+    "name": "Oak Planks",
+    "image_url": "assets/oak_planks.png",
     "crafts_from": [
       {
         "recipe": [
