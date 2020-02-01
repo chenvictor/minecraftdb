@@ -23,6 +23,11 @@ const useStyles = makeStyles({
   }
 });
 
+const test = (item) => {
+  console.log(`Item: clicked`);
+  console.log(item);
+};
+
 const CraftingGrid = (props) => {
   const classes = useStyles(props);
   const { recipe, target, produces } = props;
@@ -35,7 +40,7 @@ const CraftingGrid = (props) => {
               return (
                 <tr key={rowIndex}>
                   { row.map((cell, cellIndex) => {
-                    return (<td key={cellIndex}><ItemBox item={cell} /></td>);
+                    return (<td key={cellIndex}><ItemBox item={cell} onClick={test.bind(null, cell)}/></td>);
                   }) }
                 </tr>
               )

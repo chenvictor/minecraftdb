@@ -17,19 +17,12 @@ const generateQuery = (id, sub_id) => gql`{
 const useStyles = makeStyles({
   root: {
     position: 'relative',
-    height: ({ padding }) => `${40+2*padding}px`,
-    width: ({ padding }) => `${40+2*padding}px`,
     borderLeft: '2px solid rgb(63,63,63)',
     borderTop: '2px solid rgb(63,63,63)',
     borderBottom: '2px solid white',
     borderRight: '2px solid white',
     backgroundColor: 'rgb(150,150,150)',
-    padding: ({ padding }) => `${padding}px`,
-    overflow: 'hidden'
-  },
-  inner: {
-    width: '100%',
-    height: '100%'
+    padding: ({ padding }) => `${padding}px`
   },
   count: {
     position: 'absolute',
@@ -50,30 +43,14 @@ const ItemBox = ({
     onClick
   }) => {
   const classes = useStyles({ padding });
-  if (!item) {
-    return <div className={classes.root} />;
-  }
-  const { id, sub_id } = item;
   return (
-    <Query
-      query={generateQuery(id, sub_id)}
-    >
-      {({ loading, error, data }) => {
-        if (error) throw error;
-        const displayCount = count !== 1
-          ? (<span className={classes.count}>{count}</span>)
-          : null;
-        const content = loading
-          ? (<CircularProgress className={classes.inner} size={34} />)
-          : (<img className={classes.inner} src={data.item.image_url} alt={data.item.name} />);
-        return (
-          <div className={classes.root}>
-            {content}
-            {displayCount}
-          </div>
-        );
-      }}
-    </Query>
+    <div className={classes.root}>
+      <Item
+        item={item}
+        showTooltip={showTooltip}
+        onClick={onClick}
+      />
+    </div>
   );
 };
 

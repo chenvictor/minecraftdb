@@ -3,6 +3,7 @@ import { Query } from '@apollo/react-components';
 import { gql } from 'apollo-boost';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const generateQuery = (id, sub_id) => gql`{
   item(id: ${id}, sub_id: ${sub_id || 0}) {
@@ -15,41 +16,27 @@ const generateQuery = (id, sub_id) => gql`{
 
 const useStyles = makeStyles({
   root: {
-    position: 'relative',
-    height: ({ padding }) => `${40+2*padding}px`,
-    width: ({ padding }) => `${40+2*padding}px`,
-    borderLeft: '2px solid rgb(63,63,63)',
-    borderTop: '2px solid rgb(63,63,63)',
-    borderBottom: '2px solid white',
-    borderRight: '2px solid white',
-    backgroundColor: 'rgb(150,150,150)',
-    padding: ({ padding }) => `${padding}px`,
-    overflow: 'hidden'
+    height: props => props.size,
+    width: props => props.size,
+    '& *': {
+      width: '100%',
+      height: '100%'
+    }
   },
-  inner: {
-    width: '100%',
-    height: '100%'
-  },
-  count: {
-    position: 'absolute',
-    fontSize: '18px',
-    fontWeight: 'bold',
-    color: 'white',
-    right: 6,
-    bottom: 4,
-    zIndex: 100,
+  clickable: {
+    cursor: 'pointer'
   }
 });
 
 const Item = ({
     item,
-    size = null,
+    size = '40px',
     showTooltip = true,
     onClick
   }) => {
-  const classes = useStyles();
+  const classes = useStyles({ size });
   if (!item) {
-    return null;
+    return (<div className={classes.root} />);
   }
   const { id, sub_id } = item;
   return (
@@ -58,9 +45,17 @@ const Item = ({
     >
       {({ loading, error, data }) => {
         if (error) throw error;
-        return loading
-          ? (<CircularProgress className={classes.inner} size={34} />)
-          : (<img className={classes.inner} src={data.item.image_url} alt={data.item.name} />);
+        const inner = loading
+          ? (<CircularProgress/>)
+          : (<img src={data.item.image_url} alt={data.item.name} />);
+        const content = (!loading && showTooltip)
+          ? (<Tooltip title={data.item.name} arrow>{inner}</Tooltip>)
+          : inner;
+        const styles = [classes.root];
+        if (!loading && onClick) {
+          styles.push(classes.clickable);
+        }
+        return (<div className={styles.join(' ')} onClick={onClick}>{content}</div>);
       }}
     </Query>
   );

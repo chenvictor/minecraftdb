@@ -1,6 +1,9 @@
 import React from 'react';
 import { Query } from '@apollo/react-components';
 import { gql } from 'apollo-boost';
+import GridList from '@material-ui/core/GridList';
+import Item from './Item';
+import { serialize } from '../utils/item';
 
 const ITEMS = gql`{
   items {
@@ -12,7 +15,7 @@ const ITEMS = gql`{
 }`;
 
 const showItem = ({ id, sub_id }) => {
-  console.log(`showing item with id: ${id}:${sub_id}`);
+  console.log(`show item with id: ${id}:${sub_id}`);
 };
 
 const Display = () => {
@@ -21,21 +24,12 @@ const Display = () => {
       query={ITEMS}
     >
       {({ loading, error, data }) => {
-        if (loading) return <p>Loading...</p>
         if (error) throw error;
-        console.log(data.items);
+        if (loading) return <p>Loading...</p>;
         return (
-          <ul>
-            {
-              data.items.map(({ id, sub_id, name, image_url }) =>
-              (
-                <li key={`${id}:${sub_id}`} onClick={showItem.bind(null, { id, sub_id })}>
-                  <img src={image_url} alt={name} />
-                  <p>{name}</p>
-                </li>)
-              )
-            }
-          </ul>
+          <GridList cellHeight='auto' spacing={16}>
+            { data.items.map(item => <Item key={serialize(item)} item={item} onClick={showItem.bind(null, item)} showTooltip={true} />) }
+          </GridList>
         );
       }}
     </Query>
