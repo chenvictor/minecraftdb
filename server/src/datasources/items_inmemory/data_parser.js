@@ -59,7 +59,7 @@ const parse = raw => {
     Object.freeze(item);
     array.push(item);
   }
-  array.sort((a, b) => a.id - b.id);
+  array.sort((a, b) => a.id - b.id || a.sub_id - b.sub_id);
   const parsed = {
     pool: Object.freeze(pool),
     array: Object.freeze(array)

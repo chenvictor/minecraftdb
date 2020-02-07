@@ -1,9 +1,73 @@
 [
   {
-    "id": 17,
+    "id": 1,
     "sub_id": 0,
-    "name": "Oak Wood",
-    "image_url": "assets/oak_log.png"
+    "name": "Stone",
+    "image_url": "assets/stone.png"
+  },
+  {
+    "id": 1,
+    "sub_id": 1,
+    "name": "Granite",
+    "image_url": "assets/granite.png"
+  },
+  {
+    "id": 1,
+    "sub_id": 2,
+    "name": "Polished Granite",
+    "image_url": "assets/polished_granite.png"
+  },
+  {
+    "id": 1,
+    "sub_id": 3,
+    "name": "Diorite",
+    "image_url": "assets/diorite.png"
+  },
+  {
+    "id": 1,
+    "sub_id": 4,
+    "name": "Polished Diorite",
+    "image_url": "assets/polished_diorite.png"
+  },
+  {
+    "id": 1,
+    "sub_id": 5,
+    "name": "Andesite",
+    "image_url": "assets/andesite.png"
+  },
+  {
+    "id": 1,
+    "sub_id": 6,
+    "name": "Polished Andesite",
+    "image_url": "assets/polished_andesite.png"
+  },
+  {
+    "id": 2,
+    "name": "Grass",
+    "image_url": "assets/grass.png"
+  },
+  {
+    "id": 3,
+    "sub_id": 0,
+    "name": "Dirt",
+    "image_url": "assets/dirt.png"
+  },
+  {
+    "id": 3,
+    "sub_id": 1,
+    "name": "Coarse Dirt",
+    "image_url": "assets/coarse_dirt.png"
+  },
+  {
+    "id": 3,
+    "sub_id": 2,
+    "name": "Podzol",
+    "image_url": "assets/podzol.png"
+  },
+  {
+    "id": 4,
+    "name": "Cobblestone",
+    "image_url": "assets/cobblestone.png"
   },
   {
     "id": 5,
@@ -20,30 +84,27 @@
     ]
   },
   {
-    "id": 280,
-    "name": "Stick",
-    "image_url": "assets/stick.png",
-    "crafts_from": [
-      {
-        "recipe": [
-          ["5:0"],
-          ["5:0"]
-        ],
-        "produces": 4
-      }
-    ]
-  },
-  {
-    "id": 263,
+    "id": 12,
     "sub_id": 0,
-    "name": "Coal",
-    "image_url": "assets/coal.png"
+    "name": "Sand",
+    "image_url": "assets/sand.png"
   },
   {
-    "id": 263,
+    "id": 12,
     "sub_id": 1,
-    "name": "Charcoal",
-    "image_url": "assets/charcoal.png"
+    "name": "Red Sand",
+    "image_url": "assets/red_sand.png"
+  },
+  {
+    "id": 17,
+    "sub_id": 0,
+    "name": "Oak Wood",
+    "image_url": "assets/oak_log.png"
+  },
+  {
+    "id": 20,
+    "name": "Glass",
+    "image_url": "assets/glass.png"
   },
   {
     "id": 50,
@@ -63,6 +124,108 @@
           ["280"]
         ],
         "produces": 4
+      }
+    ]
+  },
+  {
+    "id": 263,
+    "sub_id": 0,
+    "name": "Coal",
+    "image_url": "assets/coal.png"
+  },
+  {
+    "id": 263,
+    "sub_id": 1,
+    "name": "Charcoal",
+    "image_url": "assets/charcoal.png"
+  },
+  {
+    "id": 264,
+    "name": "Diamond",
+    "image_url": "assets/diamond.png"
+  },
+  {
+    "id": 265,
+    "name": "Iron Ingot",
+    "image_url": "assets/iron_ingot.png",
+    "crafts_from": [
+      {
+        "recipe": [
+          ["452", "452", "452"],
+          ["452", "452", "452"],
+          ["452", "452", "452"]
+        ],
+        "produces": 9
+      }
+    ]
+  },
+  {
+    "id": 266,
+    "name": "Gold Ingot",
+    "image_url": "assets/gold_ingot.png",
+    "crafts_from": [
+      {
+        "recipe": [
+          ["371", "371", "371"],
+          ["371", "371", "371"],
+          ["371", "371", "371"]
+        ],
+        "produces": 9
+      }
+    ]
+  },
+  {
+    "id": 280,
+    "name": "Stick",
+    "image_url": "assets/stick.png",
+    "crafts_from": [
+      {
+        "recipe": [
+          ["5:0"],
+          ["5:0"]
+        ],
+        "produces": 4
+      }
+    ]
+  },
+  {
+    "id": 287,
+    "name": "String",
+    "image_url": "assets/string.png"
+  },
+  {
+    "id": 288,
+    "name": "Feather",
+    "image_url": "assets/feather.png"
+  },
+  {
+    "id": 289,
+    "name": "Gunpowder",
+    "image_url": "assets/gunpowder.png"
+  },
+  {
+    "id": 371,
+    "name": "Gold Nugget",
+    "image_url": "assets/gold_nugget.png",
+    "crafts_from": [
+      {
+        "recipe": [
+          ["266"]
+        ],
+        "produces": 9
+      }
+    ]
+  },
+  {
+    "id": 452,
+    "name": "Iron Nugget",
+    "image_url": "assets/iron_nugget.png",
+    "crafts_from": [
+      {
+        "recipe": [
+          ["265"]
+        ],
+        "produces": 9
       }
     ]
   }
