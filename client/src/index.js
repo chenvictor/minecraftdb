@@ -10,7 +10,9 @@ const client = new ApolloClient({
   uri: 'http://localhost:4000',
   cache: new InMemoryCache({
     dataIdFromObject: (obj) => {
-      return `${obj.id}:${obj.sub_id ? obj.sub_id : ''}`;
+      if (obj.id)
+        return `${obj.id}:${obj.sub_id ? obj.sub_id : ''}`;
+      return null;
     }
   })
 });

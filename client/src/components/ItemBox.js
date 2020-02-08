@@ -1,18 +1,6 @@
 import React from 'react';
-import { Query } from '@apollo/react-components';
-import { gql } from 'apollo-boost';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import Item from './Item';
-
-const generateQuery = (id, sub_id) => gql`{
-  item(id: ${id}, sub_id: ${sub_id || 0}) {
-    id
-    sub_id
-    name
-    image_url
-  }
-}`;
 
 const useStyles = makeStyles({
   root: {
@@ -43,6 +31,9 @@ const ItemBox = ({
     onClick
   }) => {
   const classes = useStyles({ padding });
+  const number = count !== 1
+    ? (<span className={classes.count}>{count}</span>)
+    : null;
   return (
     <div className={classes.root}>
       <Item
@@ -50,6 +41,7 @@ const ItemBox = ({
         showTooltip={showTooltip}
         onClick={onClick}
       />
+      {number}
     </div>
   );
 };

@@ -4,7 +4,12 @@ import { gql } from 'apollo-boost';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Item from './Item';
+import ItemView from './ItemView';
 import { serialize } from '../utils/item';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 const ITEMS = gql`{
   items {
@@ -15,11 +20,24 @@ const ITEMS = gql`{
   }
 }`;
 
-const showItem = ({ id, sub_id }) => {
-  console.log(`show item with id: ${id}:${sub_id}`);
-};
+const useStyles = makeStyles(theme => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 const Display = () => {
+  const classes = useStyles();
+  const [mainItem, setItem] = React.useState(null);
+
   return (
     <Query
       query={ITEMS}
@@ -28,9 +46,27 @@ const Display = () => {
         if (error) throw error;
         if (loading) return <p>Loading...</p>;
         return (
-          <GridList cellHeight='auto' spacing={8} cols={0}>
-            { data.items.map(item => <GridListTile key={serialize(item)}><Item item={item} onClick={showItem.bind(null, item)} showTooltip={true} /></GridListTile>) }
-          </GridList>
+          <div>
+            <GridList cellHeight='auto' spacing={8} cols={0}>
+              { data.items.map(item => <GridListTile key={serialize(item)}><Item item={item} onClick={() => setItem(item)} showTooltip={true} /></GridListTile>) }
+            </GridList>
+            <Modal
+              className={classes.modal}
+              open={Boolean(mainItem)}
+              onClose={() => setItem(null)}
+              closeAfterTransition
+              BackdropComponent={Backdrop}
+              BackdropProps={{
+                timeout: 500,
+              }}
+            >
+              <Fade in={Boolean(mainItem)}>
+                <div className={classes.paper}>
+                  <ItemView item={mainItem} />
+                </div>
+              </Fade>
+            </Modal>
+          </div>
         );
       }}
     </Query>
