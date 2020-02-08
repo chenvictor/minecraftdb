@@ -1,6 +1,5 @@
 import React from 'react';
 import { Query } from '@apollo/react-components';
-import { gql } from 'apollo-boost';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Item from './Item';
@@ -10,15 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-
-const ITEMS = gql`{
-  items {
-    id
-    sub_id
-    name
-    image_url
-  }
-}`;
+import { getAllItems } from '../queries';
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -40,7 +31,7 @@ const Display = () => {
 
   return (
     <Query
-      query={ITEMS}
+      query={getAllItems()}
     >
       {({ loading, error, data }) => {
         if (error) throw error;

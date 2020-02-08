@@ -1,25 +1,8 @@
 import React from 'react';
 import { Query } from '@apollo/react-components';
-import { gql } from 'apollo-boost';
 import CraftingGrid from './CraftingGrid';
-
-const generateQuery = (id, sub_id) => gql`{
-  item(id: ${id}, sub_id: ${sub_id || 0}) {
-    id
-    sub_id
-    name
-    image_url
-    crafts_from {
-      recipe {
-        id
-        sub_id
-        name
-        image_url
-      }
-      produces
-    }
-  }
-}`;
+import { getDetailedItemById } from '../queries';
+import { serialize } from '../utils/item';
 
 const ItemView = (props) => {
   const { item } = props;
@@ -27,16 +10,21 @@ const ItemView = (props) => {
 
   return (
     <Query
-      query={generateQuery(item.id,item.sub_id)}
+      query={getDetailedItemById(item)}
     >
       {({ loading, error, data }) => {
         if (error) throw error;
         if (loading) return <p>Loading...</p>;
-        const item = data.item;
+        const { item } = data;
         return (
           <div>
-            <h2>Details:</h2>
-            <h4>{`${item.id}:${item.sub_id || 0}`}</h4>
+            <div>
+              <img src={item.image_url} width='60px' alt={item.name} />
+              <div>
+                <h3>Name: {item.name}</h3>
+                <h3>Id: {serialize(item)}</h3>
+              </div>
+            </div>
             <hr />
             <h2>Crafting:</h2>
             <ul>

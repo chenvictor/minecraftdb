@@ -1,18 +1,9 @@
 import React from 'react';
 import { Query } from '@apollo/react-components';
-import { gql } from 'apollo-boost';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
-
-const generateQuery = (id, sub_id) => gql`{
-  item(id: ${id}, sub_id: ${sub_id || 0}) {
-    id
-    sub_id
-    name
-    image_url
-  }
-}`;
+import { getItemById } from '../queries'; 
 
 const useStyles = makeStyles({
   root: {
@@ -38,10 +29,9 @@ const Item = ({
   if (!item) {
     return (<div className={classes.root} />);
   }
-  const { id, sub_id } = item;
   return (
     <Query
-      query={generateQuery(id, sub_id)}
+      query={getItemById(item)}
     >
       {({ loading, error, data }) => {
         if (error) throw error;
