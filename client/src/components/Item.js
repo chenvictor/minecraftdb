@@ -41,10 +41,10 @@ const Item = ({
           ? (<CircularProgress/>)
           : (<img src={data.item.image_url} alt={data.item.name} />);
         const content = (!loading && onClick)
-          ? (<ButtonBase className={classes.root} focusVisibleClassName={classes.focused} onClick={onClick}>{inner}</ButtonBase>)
+          ? (<ButtonBase focusVisibleClassName={classes.focused} onClick={onClick}>{inner}</ButtonBase>)
           : inner;
         return (!loading && showTooltip)
-          ? (<Tooltip title={data.item.name} arrow>{content}</Tooltip>)
+          ? (<Tooltip className={classes.root} title={data.item.name} arrow>{content}</Tooltip>)
           : (<div className={classes.root}>{content}</div>);
       }}
     </Query>
